@@ -20,26 +20,84 @@ class NewsContentApiProvider {
     try {
       final response = await RestApi().getnews(getType(type: type));
       if (getType(type: type) == 'https://www.manoramanews.com/') {
+        //headlines
+        //head1
+        String class1news = 'image-overlay-bottomn';
+        String imgclass1 = 'image-main';
+        String imgclass2 = 'lazyload';
+        String attribute = 'data-src';
+        //Latestnews
+        //Latest1
+        String classlatestnes = 'news-list-ml';
         var responseString1 = response
-            .getElementsByClassName('image-overlay-bottomn')[0]
+            .getElementsByClassName(class1news)[0]
             .children[1]
             .children[0];
         var responseimage1 = response
-            .getElementsByClassName('image-main')[0]
-            .getElementsByClassName('lazyload')[0]
-            .attributes['data-src'];
-        print('$responseString1....1$responseString1');
-        return [responseString1, responseimage1];
+            .getElementsByClassName(imgclass1)[0]
+            .getElementsByClassName(imgclass2)[0]
+            .attributes[attribute];
+        var responselatestnewsString1 = response
+            .getElementsByClassName('story-list-2')[0]
+            .getElementsByClassName(class1news)[0]
+            .getElementsByTagName('a')[0];
+        var responselatestimage1 = response
+            .getElementsByClassName('story-list-2')[0]
+            .getElementsByClassName(imgclass1)[0]
+            .getElementsByClassName(imgclass2)[0]
+            .attributes[attribute];
+        print(
+            '$responseString1....1$responseString1${responselatestnewsString1}$responselatestimage1');
+        return [
+          responseString1,
+          responseimage1,
+          responselatestnewsString1,
+          responselatestimage1
+        ];
       } else if (getType(type: type) == 'https://www.twentyfournews.com/') {
-        var responseString =
-            response.getElementsByClassName('dtItle HeadingMain2').first;
+        //headlines
+        //head1
+        String class1news = 'dtItle HeadingMain2';
+        String imgclass1 = 'main-post-img relative';
+        String imgclass2 = 'lazy';
+        String attribute = 'data-src';
+        //latestnews
+        //1
+        String classlatesthead = 'row spost-img mbtm20';
+        String classlatesthead1 = 'dtItle HeadingSec';
+        String classimage = 'lazy mbtm15';
+        String attributelatestimg = 'data-src';
+        //Sports
+        String spotsclass = 'keralaNews prite30';
+        String sportsclass2 = 'dtItle HeadingMain mtop20';
+        //head1
+        var responseString = response.getElementsByClassName(class1news).first;
         var responseimage = response
-            .getElementsByClassName('main-post-img relative')
+            .getElementsByClassName(imgclass1)
             .first
-            .getElementsByClassName('lazy')[0]
-            .attributes['data-src'];
+            .getElementsByClassName(imgclass2)[0]
+            .attributes[attribute];
+
         print('${responseString.text.trim()}....$responseimage');
-        return [responseString, responseimage];
+
+        //latest1
+
+        var latestnewsimage = response
+            .getElementsByClassName(classlatesthead)[0]
+            .getElementsByTagName('amp-img')[0]
+            .attributes['src'];
+        print('latestimage....$latestnewsimage');
+        var latestnewsnews = response
+            .getElementsByClassName(classlatesthead)[0]
+            .getElementsByClassName('dtItle HeadingSec')[0];
+        print(latestnewsnews.text);
+        // print('laestnews..${latestnewsnews.text}...${latestnewsimage}');
+        //Sports
+        // var sportslatestnews =
+        //     response.getElementByClassName(spotsclass).attributes;
+
+        // print('....$sportslatestnews');
+        return [responseString, responseimage, latestnewsnews, latestnewsimage];
       }
     } on Errorexceptios catch (e) {
       print(e);

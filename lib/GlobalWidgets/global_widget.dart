@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:news_roll_out/GlobalData/globalthemeconstats.dart';
 
 enum FixedIconSize {
   EXTRASMALL,
@@ -65,6 +66,31 @@ class GlobalWidget {
         color: color,
       );
     }
+  }
+
+  Widget DecorativeContainer(Widget child,
+      {Color colorborder = const Color(0xFFE4E4E4)}) {
+    return Container(
+      decoration: ShapeDecoration(
+        gradient: LinearGradient(
+          colors: [GlobalTheme().kGreyLightestest, Colors.white],
+          begin: FractionalOffset.bottomCenter,
+          end: FractionalOffset.topCenter,
+        ),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x1FA0A0A0),
+            spreadRadius: 1,
+            blurRadius: 10,
+            offset: Offset(0, 3),
+          )
+        ],
+        shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(width: 2.0, color: colorborder)),
+      ),
+      child: child,
+    );
   }
 }
 

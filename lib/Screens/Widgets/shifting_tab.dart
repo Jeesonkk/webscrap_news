@@ -267,7 +267,7 @@ class _ShiftingTabWidget extends AnimatedWidget {
         weight: 1.0,
         tween: ColorTween(
           begin: GlobalTheme().backgroundColor,
-          end: GlobalTheme().primaryBlue,
+          end: GlobalTheme().kGreyLightestest,
         ),
       ),
     ]);
@@ -279,12 +279,15 @@ class _ShiftingTabWidget extends AnimatedWidget {
 
     return Expanded(
       flex: (tween.animate(animation).value * 100).round(),
-      child: InkWell(
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        onTap: onTap as void Function()?,
-        child:
-            _buildTab(animation, color, _tabColor, margin!.toDouble(), context),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 5, right: 5),
+        child: InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          onTap: onTap as void Function()?,
+          child: _buildTab(
+              animation, color, _tabColor, margin!.toDouble(), context),
+        ),
       ),
     );
   }
@@ -303,7 +306,7 @@ class _ShiftingTabWidget extends AnimatedWidget {
       curve: Curves.easeIn,
       decoration: BoxDecoration(
           color: tabColor.evaluate(animation),
-          borderRadius: BorderRadius.circular(40.0)),
+          borderRadius: BorderRadius.circular(5.0)),
       margin: EdgeInsets.only(right: margin, top: 10.0, bottom: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -353,9 +356,9 @@ class _ShiftingTabWidget extends AnimatedWidget {
               child: TextView(
             text!,
             size: 12.0,
-            color: Colors.white,
+            color: Color.fromARGB(255, 28, 23, 23),
             decoration: TextDecoration.none,
-            fontWeight: FontWeight.normal,
+            fontWeight: FontWeight.bold,
             overflow: TextOverflow.visible,
             textAlign: TextAlign.center,
             textScaleFactor: .8,
